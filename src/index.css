@@ -278,6 +278,24 @@
 /* ============================================
    Animations
    ============================================ */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
 @keyframes slideInRight {
   from {
     transform: translateX(100%);

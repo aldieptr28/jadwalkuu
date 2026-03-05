@@ -109,6 +109,11 @@ export default function App() {
     showToast(`Halaman diduplikat sebagai "${newPage.name}"`, 'success');
   }, [pages, setPages, showToast]);
 
+  const handleLogout = useCallback(() => {
+    setIsLoggedIn(false);
+    showToast('Berhasil keluar', 'success');
+  }, [setIsLoggedIn, showToast]);
+
   // ── Table Save Flow ───────────────────────────────────────────────────
   // Called by TableView when debounced table state changes
   const saveTableData = useCallback((pageId, tableState) => {
@@ -166,6 +171,7 @@ export default function App() {
           onOpenSidebar={() => setSidebarOpen(true)}
           isDark={isDark}
           onToggleDark={() => setIsDark((prev) => !prev)}
+          onLogout={handleLogout}
           showToast={showToast}
         />
       </div>

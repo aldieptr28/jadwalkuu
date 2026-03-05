@@ -15,6 +15,7 @@ export function MainContent({
     onOpenSidebar,
     isDark,
     onToggleDark,
+    onLogout,
     showToast,
 }) {
     const handlePrint = () => {
@@ -68,6 +69,21 @@ export function MainContent({
 
                     {/* Dark mode toggle */}
                     <DarkModeToggle isDark={isDark} onToggle={onToggleDark} />
+
+                    {/* Logout button */}
+                    <button
+                        onClick={onLogout}
+                        className="
+                p-2 rounded-lg text-slate-500 hover:bg-rose-50 dark:hover:bg-rose-900/20
+                hover:text-rose-600 dark:hover:text-rose-400 transition-colors ml-1
+              "
+                        aria-label="Keluar"
+                        title="Keluar dari akun"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                    </button>
                 </div>
             </header>
 

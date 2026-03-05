@@ -23,12 +23,14 @@ export function LoginScreen({ onLogin }) {
 
         // Simulate brief loading for UX feel
         setTimeout(() => {
-            if (username === 'admin' && password === 'admin') {
+            if (username === 'admin' && password === 'confirm123') {
                 localStorage.setItem('isLoggedIn', 'true');
                 onLogin();
             } else {
-                setError('Username atau password salah. Coba lagi.');
+                setError('Gabisa Masuk 🥺');
                 setLoading(false);
+                // Reset error state after animation completes
+                setTimeout(() => setError(''), 2000);
             }
         }, 400);
     };
@@ -62,24 +64,19 @@ export function LoginScreen({ onLogin }) {
                 </div>
 
                 {/* Login Card */}
-                <div className="
+                <div className={`
           glass-card rounded-2xl p-8 shadow-xl
           border border-white/60 dark:border-slate-700/60
-        ">
-                    <h2 className="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-6">
-                        Masuk ke Akun
+          ${error ? 'animate-[shake_0.5s_ease-in-out]' : ''}
+        `}>
+                    <h2 className="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-6 text-center">
+                        Silakan Masuk
                     </h2>
 
                     <form onSubmit={handleSubmit} noValidate>
                         <div className="space-y-4">
                             {/* Username */}
                             <div>
-                                <label
-                                    htmlFor="login-username"
-                                    className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1.5"
-                                >
-                                    Username
-                                </label>
                                 <input
                                     id="login-username"
                                     type="text"
@@ -87,7 +84,7 @@ export function LoginScreen({ onLogin }) {
                                     autoFocus
                                     value={username}
                                     onChange={(e) => { setUsername(e.target.value); setError(''); }}
-                                    placeholder="admin"
+                                    placeholder="Username"
                                     className="
                     w-full px-3.5 py-2.5 rounded-lg text-sm
                     border border-slate-200 dark:border-slate-600
@@ -95,7 +92,7 @@ export function LoginScreen({ onLogin }) {
                     text-slate-800 dark:text-slate-100
                     placeholder-slate-400 dark:placeholder-slate-500
                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                    transition-all
+                    transition-all text-center
                   "
                                     aria-label="Username login"
                                 />
@@ -103,19 +100,13 @@ export function LoginScreen({ onLogin }) {
 
                             {/* Password */}
                             <div>
-                                <label
-                                    htmlFor="login-password"
-                                    className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1.5"
-                                >
-                                    Password
-                                </label>
                                 <input
                                     id="login-password"
                                     type="password"
                                     autoComplete="current-password"
                                     value={password}
                                     onChange={(e) => { setPassword(e.target.value); setError(''); }}
-                                    placeholder="••••••••"
+                                    placeholder="Password"
                                     className="
                     w-full px-3.5 py-2.5 rounded-lg text-sm
                     border border-slate-200 dark:border-slate-600
@@ -123,21 +114,21 @@ export function LoginScreen({ onLogin }) {
                     text-slate-800 dark:text-slate-100
                     placeholder-slate-400 dark:placeholder-slate-500
                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                    transition-all
+                    transition-all text-center
                   "
                                     aria-label="Password login"
                                 />
                             </div>
                         </div>
 
-                        {/* Error message — no alert() */}
+                        {/* Error message */}
                         {error && (
                             <div
-                                className="mt-4 px-3 py-2.5 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
+                                className="mt-4 text-center animate-fade-in"
                                 role="alert"
                                 aria-live="assertive"
                             >
-                                <p className="text-red-600 dark:text-red-400 text-sm font-medium">{error}</p>
+                                <p className="text-rose-500 dark:text-rose-400 text-sm font-medium">{error}</p>
                             </div>
                         )}
 
@@ -168,10 +159,6 @@ export function LoginScreen({ onLogin }) {
                             )}
                         </button>
                     </form>
-
-                    <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-6">
-                        Hint: username <strong>admin</strong>, password <strong>admin</strong>
-                    </p>
                 </div>
 
                 <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-6">
